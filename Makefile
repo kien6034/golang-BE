@@ -24,6 +24,8 @@ migratedown:
 sqlc:
 	sqlc generate
 
+mock:
+	mockgen -package mockdb -destination db/mock/store.go github.com/kien6034/golang-BE/db/sqlc Store
 
 server:
 	go run main.go
