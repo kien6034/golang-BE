@@ -27,6 +27,8 @@ func NewStore(db *sql.DB) *Store {
 	}
 }
 
+var txKey = struct{}{}
+
 // ExecTx executes a function within a database transaction
 func (store *Store) execTx(ctx context.Context, fn func(*Queries) error) error {
 	tx, err := store.db.BeginTx(ctx, nil)
