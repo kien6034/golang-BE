@@ -1,4 +1,5 @@
 DB_URL=postgresql://root:kien6034@localhost:5432/simple_bank?sslmode=disable
+.PHONY: network postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 new_migration db_docs db_schema sqlc test server mock proto evans redis
 
 
 postgres:
@@ -15,3 +16,7 @@ migrateup:
 
 migratedown:
 	migrate -path db/migration -database "$(DB_URL)" -verbose down
+
+
+sqlc:
+	sqlc generate
