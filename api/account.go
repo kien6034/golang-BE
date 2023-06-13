@@ -7,11 +7,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	db "github.com/kien6034/golang-BE/db/sqlc"
+	"github.com/lib/pq"
 )
 
 type createAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
-	Currency string `json:"currency" binding:"required,curency"`
+	Currency string `json:"currency" binding:"required,currency"`
 }
 
 func (server *Server) createAccount(ctx *gin.Context) {
@@ -21,13 +22,20 @@ func (server *Server) createAccount(ctx *gin.Context) {
 		return
 	}
 
-	fmt.Println("res", req)
 	account, err := server.store.CreateAccount(ctx, db.CreateAccountParams{
 		Owner:    req.Owner,
 		Balance:  0,
 		Currency: req.Currency,
 	})
 	if err != nil {
+		if pqError, ok := err.(*pq.Error); ok {
+			switch pqError.Code.Name() {
+			case "foreign_key_violation", "unique_violation":
+				ctx.JSON(http.StatusForbidden, errorResponse(err))
+				return
+			}
+		}
+
 		ctx.JSON(500, errorResponse(err))
 		return
 	}
