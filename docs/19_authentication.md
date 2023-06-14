@@ -1,0 +1,7 @@
+## TLS - SSL authentication
+
+https://dev.to/techschoolguru/a-complete-overview-of-ssl-tls-and-its-cryptographic-system-36pd
+
+## JWT token authentication - PASETO
+
+https://dev.to/techschoolguru/why-paseto-is-better-than-jwt-for-token-based-authentication-1b0c
