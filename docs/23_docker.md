@@ -33,3 +33,23 @@ docker remove image-name
 ```
 docker container inspect simplebank
 ```
+
+### Connect two stand-alone containers
+
+- Create a network
+
+```
+docker network create bank-network
+```
+
+- Connect the `postgres15` containers to the network
+
+```
+docker network connect bank-network postgres15
+```
+
+- Run the `simplebank` container and connect it to the `bank-network`
+
+```
+docker run --name simplebank --network bank-network -p 8080:8080 -e GIN_MODE=release -e DB_SOURCE="postgresql://root:kien6034@postgres15:5432/simple_bank?sslmode=disable" simplebank:latest
+```
