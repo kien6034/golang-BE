@@ -2,7 +2,30 @@
 
 A Dockerfile is a text file that contains a series of instructions used to create a docker images
 
-## Multi stage docker file
+## Docker file vs Docker compose file
+
+### A docker file
+
+A Dockerfile is a text document that contains all the commands or instructions a user could call on the command line to `assemble an image`. Using the docker build command, users can create an automated build that executes several command-line instructions in succession. The end result of a Dockerfile is a `Docker image` that can be run in a Docker container.
+
+For example, a Dockerfile might include instructions to:
+
+- Set up the base OS (e.g., Ubuntu, Alpine).
+- Install the necessary system libraries.
+- Install the necessary programming languages (e.g., Python, Java).
+- Set environment variables.
+- Copy the application code into the container.
+- Specify the default command to run when the container starts.
+
+### Docker compose file
+
+On the other hand, Docker Compose is a tool for defining and managing `multi-container Docker applications`. It uses a YAML file (docker-compose.yml) to configure the application's services, networks, and volumes. Then, with a single command (docker-compose up), you can create and start all the services specified in the configuration.
+
+For example, a docker-compose.yml file might include instructions to:
+
+- Create three services: a web server, a database, and a Redis instance.
+- Set up network connections between them.
+- Set up shared volumes.
 
 ## Some commands
 
